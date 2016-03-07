@@ -1,0 +1,13 @@
+#!/usr/bin/env ruby
+
+require "ffi_gen"
+
+LIBRDKAFKA_DIR = "/Users/michaeltbaker/Code/librdkafka"
+
+FFIGen.generate(
+  module_name: "RbKafka",
+  ffi_lib:     "librdkafka.1.dylib",
+  headers:     [File.join(LIBRDKAFKA_DIR, "src/rdkafka.h")],
+  cflags:      `llvm-config-3.5 --cflags`.split(" "),
+  output:      "dist/rb_kafka.rb"
+)
